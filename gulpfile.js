@@ -94,14 +94,15 @@ function scripts() {
 function watch() {
     browsersync.init({
         server: {
-            baseDir: "./"
+            baseDir: "./done/",
+            index: "index.min.html"
         }
     })
 
-    gulp.watch(paths.html.dest).on('change', browsersync.reload)
     gulp.watch(paths.html.src, html)
     gulp.watch(paths.styles.src, styles)
     gulp.watch(paths.scripts.src, scripts)
+    gulp.watch(paths.html.dest).on('change', browsersync.reload)
 }
 
 const build = gulp.series(clean, html, gulp.parallel(styles, scripts), watch);
